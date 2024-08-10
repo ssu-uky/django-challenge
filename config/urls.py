@@ -5,6 +5,7 @@ from django.urls import path, include
 from fake_db import user_db
 
 from todo.views import todo_list, todo_info, todo_create, todo_update, todo_delete
+from todo.cb_views import TodoListView
 from users import views as user_views
 
 
@@ -35,4 +36,5 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/login/", user_views.login, name="login"),
     path("accounts/signup/", user_views.sign_up, name="signup"),
+    path("cbv/", include("todo.urls")),
 ]
