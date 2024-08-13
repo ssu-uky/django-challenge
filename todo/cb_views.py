@@ -10,7 +10,7 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 from django.db.models import Q
 
-from todo.forms import CommentForm
+from todo.forms import CommentForm, TodoForm, TodoUpdateForm
 from todo.models import Todo, Comment
 
 from django.core.paginator import Paginator
@@ -60,8 +60,8 @@ class TodoDetailView(LoginRequiredMixin, DetailView):
 
 class TodoCreateView(LoginRequiredMixin, CreateView):
     model = Todo
-    fields = ["title", "description", "start_date", "end_date"]
     template_name = "todo/todo_create.html"
+    form_class = TodoForm
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -75,8 +75,8 @@ class TodoCreateView(LoginRequiredMixin, CreateView):
 
 class TodoUpdateView(LoginRequiredMixin, UpdateView):
     model = Todo
-    fields = ["title", "description", "start_date", "end_date", "is_completed", "id"]
     template_name = "todo/todo_update.html"
+    form_class = TodoUpdateForm
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)

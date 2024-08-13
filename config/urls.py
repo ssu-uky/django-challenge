@@ -1,3 +1,6 @@
+from django.conf import settings
+from django.conf.urls.static import static
+
 from django.contrib import admin
 from django.http import Http404
 from django.shortcuts import render
@@ -37,4 +40,8 @@ urlpatterns = [
     path("accounts/login/", user_views.login, name="login"),
     path("accounts/signup/", user_views.sign_up, name="signup"),
     path("cbv/", include("todo.urls")),
+    path("summernote/", include("django_summernote.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
