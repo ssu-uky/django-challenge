@@ -1,19 +1,38 @@
+import json
 from pathlib import Path
 import os
 import environ
 
 # .env 설정
-env = environ.Env(DEBUG=(bool, False))
+# env = environ.Env(DEBUG=(bool, False))
 
+# BASE_DIR = Path(__file__).resolve().parent.parent
+
+# environ.Env.read_env(env_file=os.path.join(BASE_DIR, ".env"))
+
+# SECRET_KEY = env("SECRET_KEY")
+
+# DEBUG = True
+
+# ALLOWED_HOSTS = ["*"]
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-environ.Env.read_env(env_file=os.path.join(BASE_DIR, ".env"))
+# 환경변수
+with open(BASE_DIR / ".config_secret" / "secret.json") as f:
+    config_secret_str = f.read()
 
-SECRET_KEY = env("SECRET_KEY")
+SECRET = json.loads(config_secret_str)
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = SECRET.get("DJANGO_SECRET_KEY")
+
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -175,3 +194,13 @@ SUMMERNOTE_CONFIG = {
     # 첨부파일의 절대경로 URI 사용 설정
     "attachment_absolute_uri": True,
 }
+
+AUTH_USER_MODEL = "users.User"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.naver.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = SECRET["EMAIL"]["USER"]
+EMAIL_HOST_PASSWORD = SECRET["EMAIL"]["PASSWORD"]
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

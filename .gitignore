@@ -140,6 +140,12 @@ ENV/
 env.bak/
 venv.bak/
 
+.config_secret
+.config_secret/
+.config_secret/*
+
+secret_json
+
 # Spyder project settings
 .spyderproject
 .spyproject

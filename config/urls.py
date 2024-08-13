@@ -37,8 +37,9 @@ urlpatterns = [
     path("todo/<int:todo_id>/update/", todo_update, name="todo_update"),
     path("todo/<int:todo_id>/delete/", todo_delete, name="todo_delete"),
     path("accounts/", include("django.contrib.auth.urls")),
-    path("accounts/login/", user_views.login, name="login"),
-    path("accounts/signup/", user_views.sign_up, name="signup"),
+    # path("accounts/login/", user_views.login, name="login"),
+    # path("accounts/signup/", user_views.sign_up, name="signup"),
+    path("users/", include("users.urls")),
     path("cbv/", include("todo.urls")),
     path("summernote/", include("django_summernote.urls")),
 ]
