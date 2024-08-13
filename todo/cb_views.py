@@ -29,7 +29,9 @@ class TodoListView(LoginRequiredMixin, ListView):
 
         q = self.request.GET.get("q")
         if q:
-            queryset = queryset.filter(Q(title__icontains=q) | Q(content__icontains=q))
+            queryset = queryset.filter(
+                Q(title__icontains=q) | Q(description__icontains=q)
+            )
         return queryset
 
 
