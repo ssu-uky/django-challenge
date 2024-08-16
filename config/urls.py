@@ -11,7 +11,6 @@ from todo.views import todo_list, todo_info, todo_create, todo_update, todo_dele
 from todo.cb_views import TodoListView
 from users import views as user_views
 
-
 _db = user_db
 
 
