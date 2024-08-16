@@ -141,7 +141,7 @@ class CommentDeleteView(LoginRequiredMixin, DeleteView):
         obj = super().get_object(queryset)
 
         if obj.user != self.request.user and not self.request.user.is_superuser:
-            raise Http404("해당 댓글을 삭제할 권한이 없습니다.")
+            raise Http404("해당 댓글을 삭제할 권한이 없습니다!")
         return obj
 
     def get_success_url(self):
