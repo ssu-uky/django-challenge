@@ -11,7 +11,6 @@ from todo.views import todo_list, todo_info, todo_create, todo_update, todo_dele
 from todo.cb_views import TodoListView
 from users import views as user_views
 
-
 _db = user_db
 
 
@@ -36,9 +35,9 @@ urlpatterns = [
     path("todo/<int:todo_id>/", todo_info, name="todo_info"),
     path("todo/<int:todo_id>/update/", todo_update, name="todo_update"),
     path("todo/<int:todo_id>/delete/", todo_delete, name="todo_delete"),
-    path("accounts/", include("django.contrib.auth.urls")),
     # path("accounts/login/", user_views.login, name="login"),
     # path("accounts/signup/", user_views.sign_up, name="signup"),
+    path("accounts/", include("django.contrib.auth.urls")),
     path("users/", include("users.urls")),
     path("cbv/", include("todo.urls")),
     path("summernote/", include("django_summernote.urls")),
